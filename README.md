@@ -24,3 +24,32 @@ subscriber()
   }
 
 }
+
+-Main 
+
+  -manage data(gui)
+  
+    - prints labels
+    - 
+  
+  - magazine
+    - list of authors
+    - monthly basis
+  
+  -discount
+  -subscriber heirarchy
+
+subscriver()
+{
+
+  months remaining:time
+    (title)
+  
+  nameAddressList: List
+  
+  Add/set subTime():void
+  
+  printLabel():string
+  
+}
+  
