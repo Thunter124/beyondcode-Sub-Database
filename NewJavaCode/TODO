@@ -1,0 +1,4 @@
+  - create AdCompanyDatabase
+  - create GUI
+  - create "LabelPrinter" class that prints shipping lables, renewal offer lables, and expiration labels
+  - probably a lot of other stuff that we'll figure out
