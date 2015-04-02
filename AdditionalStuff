@@ -1,0 +1,42 @@
+Magazine:
+	(+) getVolume ()
+	(+) setVolume()
+	(+)getIssueNumber ()
+	(+)setIssueNumber()
+Subscriber:
+	(-) active
+	(-) expOffer
+	(+) bool checkStatus()
+	
+	(+) setActive()    
+	(+) setInactive()
+			//Changes status attribute active for shipping labels 
+ 			-bool ChangeStatus(Subscriber s){ 
+					if(s.getCopiesRemaining<=0){
+						s.setInactive;
+					}else{s.setActive}
+					}
+	
+	(+) getCopiesRemaining()
+Database:
+	(+)getMagazineByIssueNumber 
+	(+)getMagazineByAuthor
+	
+bool loSubs(Subscriber s){
+	if(s.getCopiesRemaining>= 1 && s.getCopiesRemaining <=3 ){
+		return true;
+	}else{return false;}
+	
+}
+
+void countMonthsInactive(Subscriber s){
+	int expMailTime= 3;
+	if(s.getCopiesRemaining <=0){
+		s.monthsInactive++;
+		if((s.monthsInactive%expMailTime == 0) || (s.monthsInactive == 1)){
+			expOffer = true;
+		}else{expOffer = false;}
+	}else{s.monthsInactive=0;}
+	
+	
+}
