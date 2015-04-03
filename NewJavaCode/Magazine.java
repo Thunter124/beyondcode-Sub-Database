@@ -7,6 +7,8 @@ public class Magazine implements Serializable{
 
 	private static final long serialVersionUID = 7873871534936897269L;
 	private String title;
+	private int issueNum;
+	private int volumeNum;
 	private List<Article> articles;
 	private List<Ad> ads;
 	
@@ -79,6 +81,23 @@ public class Magazine implements Serializable{
 	public String getTitle(){
 		return title;
 	}
+	
+	public void setIssueNum(int num){
+		issueNum = num;
+	}
+	
+	public int getIssueNum(){
+		return issueNum;
+	}
+	
+	public void setVolumeNum(int num){
+		volumeNum = num;
+	}
+	
+	public int getVolumeNum(){
+		return volumeNum;
+	}
+	
 	
 	
 }
