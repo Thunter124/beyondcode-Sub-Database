@@ -38,4 +38,10 @@ public class MagazineDatabase implements Serializable{
 		return magazines;
 	}
 	
+	public Magazine getMagazineByIssueNum(int num){
+		
+	}
+	
+	
+	
 }
