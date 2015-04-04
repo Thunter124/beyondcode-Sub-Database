@@ -12,13 +12,14 @@ public class Subscriber implements Serializable{
 	private String billingName;
 	private String billingAddress;
 	
-	Subscriber(ShippingAddress address, String billingName, String billingAddress, int startingCopies){
-		addresses = new ArrayList<SAChippingAddress>();
-		addresses.add(address);
+	public Subscriber(String billingName, String billingAddress, int startingCopies){
 		 
 		this.billingName = billingName;
 		this.billingAddress = billingAddress;
+		if(startingCopies < 0)
+			startingCopies = 0;
 		this.copiesRemaining = startingCopies;
+		addresses = new ArrayList<ShippingAddress>();
 	 }
 	
 	public void addAddress(ShippingAddress address){
@@ -32,7 +33,7 @@ public class Subscriber implements Serializable{
         return copiesRemaining;
     }
     
-    public void increaseCopRemBy(int val){
+    public void increaseCopiesRemainingBy(int val){
          this.copiesRemaining += val;
     }
     

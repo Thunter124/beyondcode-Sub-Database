@@ -9,7 +9,7 @@ public class ShippingAddress implements Serializable{
 	private String name;
 	private int copiesPerIssue;
 	
-	ShippingAddress(String name, String address, int copiesPerIssue){
+	public ShippingAddress(String name, String address, int copiesPerIssue){
         this.name = name;
         this.address = address;
         if(copiesPerIssue < 1)
@@ -17,7 +17,7 @@ public class ShippingAddress implements Serializable{
         this.copiesPerIssue = copiesPerIssue;
     }
 
-    String getName(){
+	String getName(){
         return name;
     }
     void setName(String name){
