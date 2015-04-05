@@ -7,9 +7,9 @@ public class AdCompanyDatabase implements Serializable{
 	
 	private static final long serialVersionUID = -8040534924097812533L;
 	
-	private List<AdCompany> activeCompanies;
-	private List<AdCompany> inactiveCompanies;
-	private List<AdCompany> doNotMailCompanies;
+	private ArrayList<AdCompany> activeCompanies;
+	private ArrayList<AdCompany> inactiveCompanies;
+	private ArrayList<AdCompany> doNotMailCompanies;
 	
 	public AdCompanyDatabase(){
 		activeCompanies = new ArrayList<AdCompany>();
@@ -31,15 +31,15 @@ public class AdCompanyDatabase implements Serializable{
 	}
 	
 
-	public List<AdCompany> getActiveCompanies(){
+	public ArrayList<AdCompany> getActiveCompanies(){
 		return activeCompanies;
 	}
 	
-	public List<AdCompany> getInactiveCompanies(){
+	public ArrayList<AdCompany> getInactiveCompanies(){
 		return inactiveCompanies;
 	}
 	
-	public List<AdCompany> getDoNotMailCompanies(){
+	public ArrayList<AdCompany> getDoNotMailCompanies(){
 		return doNotMailCompanies;
 	}
 	

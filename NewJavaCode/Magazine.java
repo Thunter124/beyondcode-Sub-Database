@@ -12,8 +12,10 @@ public class Magazine implements Serializable{
 	private List<Article> articles;
 	private List<Ad> ads;
 	
-	public Magazine(String title){
+	public Magazine(String title, int volumeNum, int issueNum){
 		this.title = title;
+		this.volumeNum = volumeNum;
+		this.issueNum = issueNum;
 		articles = new ArrayList<Article>();
 	}
 	
@@ -98,6 +100,10 @@ public class Magazine implements Serializable{
 		return volumeNum;
 	}
 	
+	@Override
+	public String toString(){
+		return "Vol. " + volumeNum + " Iss. " + issueNum + ", " + title;
+	}
 	
 	
 }

@@ -29,6 +29,7 @@ public class CreateSubscriberGUI extends JFrame {
 	private JTextField tfZipCode;
 	private JTextField tfStartingCopies;
 	private JTextField tfNumAddresses;
+	private JTextField tfCopiesPerAddressSingle;
 	
 	private JButton btnApply;
 	private JCheckBox cbSameAddress;
@@ -37,6 +38,7 @@ public class CreateSubscriberGUI extends JFrame {
 	private Subscriber sub = null;
 	Main main;
 	private CreateSubscriberGUI _this;
+	
 	
 	public CreateSubscriberGUI(Main main) {
 		initWindow();
@@ -61,6 +63,7 @@ public class CreateSubscriberGUI extends JFrame {
 									|| tfStreetAddress.getText().equals("")
 									|| tfNumAddresses.getText().equals(""))){
 								btnApply.setEnabled(true);
+								tfCopiesPerAddressSingle.setEnabled(true);
 							}
 								
 						}else{
@@ -147,8 +150,28 @@ public class CreateSubscriberGUI extends JFrame {
 		btnApply = new JButton("Apply");
 		btnApply.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				main.passNewSubscriber(sub);
-				dispose();
+				if(cbSameAddress.isSelected() && cbSameAddress.isEnabled()){
+					
+					try{
+						int copiesPerAddress = Integer.parseInt(tfCopiesPerAddressSingle.getText());
+						int startingCopies = Integer.parseInt(tfStartingCopies.getText());
+						if(copiesPerAddress < 1)
+							throw new NumberFormatException();
+						ShippingAddress sa = new ShippingAddress(tfName.getText(), tfStreetAddress.getText() + " " + tfCityState.getText() + " " + tfZipCode.getText(), copiesPerAddress);
+						sub = new Subscriber(tfName.getText(), tfStreetAddress.getText() + " " + tfCityState.getText() + " " + tfZipCode.getText(), startingCopies);
+						sub.addAddress(sa);
+						if(sub == null)
+							System.out.println("why da heck is it null");
+						else
+							System.out.println("why da heck is it not null");
+						main.passNewSubscriber(sub);
+						dispose();
+					}catch(NumberFormatException e){
+						JOptionPane.showMessageDialog(null, "The copies per issue of the single address must be a number, and greater than 0!", "Error!", JOptionPane.WARNING_MESSAGE);
+					}
+						
+					
+				}
 			}
 		});
 		btnApply.setEnabled(false);
@@ -191,6 +214,11 @@ public class CreateSubscriberGUI extends JFrame {
 		JLabel lblSameShippingAddress = DefaultComponentFactory.getInstance().createLabel("Same Shipping Address?");
 		lblSameShippingAddress.setBounds(26, 168, 153, 14);
 		getContentPane().add(lblSameShippingAddress);
+		
+
+		JLabel lblCopiesPerIssueSingle = DefaultComponentFactory.getInstance().createLabel("Copies Per Issue (Single)");
+		lblCopiesPerIssueSingle.setBounds(26, 205, 153, 23);
+		getContentPane().add(lblCopiesPerIssueSingle);
 	}
 	
 	private void initTextFields(){
@@ -245,6 +273,14 @@ public class CreateSubscriberGUI extends JFrame {
 		tfNumAddresses.setBounds(26, 137, 40, 20);
 		getContentPane().add(tfNumAddresses);
 		tfNumAddresses.setColumns(10);
+		
+
+		tfCopiesPerAddressSingle = new JTextField();
+		tfCopiesPerAddressSingle.setEnabled(false);
+		tfCopiesPerAddressSingle.setBounds(26, 229, 40, 20);
+		getContentPane().add(tfCopiesPerAddressSingle);
+		tfCopiesPerAddressSingle.setColumns(10);
+		
 	}
 	
 	//called by the final CreateAddressGUI window when the subscriber's info is complete

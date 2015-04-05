@@ -65,6 +65,9 @@ public class Subscriber implements Serializable{
     List<String> getShippingLables(){
     	return null;
     }
+    public String toString(){
+    	return billingName;
+    }
 	
 	
 }

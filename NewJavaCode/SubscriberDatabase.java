@@ -6,9 +6,9 @@ import java.util.List;
 public class SubscriberDatabase implements Serializable{
 	
 	private static final long serialVersionUID = 310181458808638633L;
-	private List<Subscriber> activeSubscribers;
-	private List<Subscriber> inactiveSubscribers;
-	private List<Subscriber> doNotMailSubscribers;
+	private ArrayList<Subscriber> activeSubscribers;
+	private ArrayList<Subscriber> inactiveSubscribers;
+	private ArrayList<Subscriber> doNotMailSubscribers;
 	
 	
 	public SubscriberDatabase(){
@@ -30,15 +30,15 @@ public class SubscriberDatabase implements Serializable{
 		return false;
 	}
 	
-	public List<Subscriber> getActiveSubscribers(){
+	public ArrayList<Subscriber> getActiveSubscribers(){
 		return activeSubscribers;
 	}
 	
-	public List<Subscriber> getInactiveSubscribers(){
+	public ArrayList<Subscriber> getInactiveSubscribers(){
 		return inactiveSubscribers;
 	}
 	
-	public List<Subscriber> getDoNotMailSubscribers(){
+	public ArrayList<Subscriber> getDoNotMailSubscribers(){
 		return doNotMailSubscribers;
 	}
 	

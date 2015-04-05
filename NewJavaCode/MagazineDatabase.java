@@ -6,8 +6,8 @@ import java.util.List;
 public class MagazineDatabase implements Serializable{
 	
 	private static final long serialVersionUID = -2392224217321253700L;
-	private List<Magazine> inProgressMagazines;
-	private List<Magazine> publishedMagazines;
+	private ArrayList<Magazine> inProgressMagazines;
+	private ArrayList<Magazine> publishedMagazines;
 	
 	public MagazineDatabase(){
 		inProgressMagazines = new ArrayList<Magazine>();
@@ -47,11 +47,11 @@ public class MagazineDatabase implements Serializable{
 		return false;
 	}
 	
-	public List<Magazine> getInProgressMagazines(){
+	public ArrayList<Magazine> getInProgressMagazines(){
 		return inProgressMagazines;
 	}
 	
-	public List<Magazine> getPublishedMagazines(){
+	public ArrayList<Magazine> getPublishedMagazines(){
 		return publishedMagazines;
 	}
 	
