@@ -1,5 +1,4 @@
   - work on GUI
-      - implement the load button
   - create "LabelPrinter" class that prints shipping lables, renewal offer lables, and expiration labels
   - probably a lot of other stuff that we'll figure out
   - add boolean for isBoardOfAdvisors to Subscriber class
