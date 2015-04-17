@@ -1,8 +1,6 @@
   - work on GUI
-      - add "Add Ad Company" button to MainGUI that starts corresponding "CreateAdCompanyGUI" (Needs to be written)
       - implement the load button
   - create "LabelPrinter" class that prints shipping lables, renewal offer lables, and expiration labels
-  - create database class that holds the three sub databases
   - probably a lot of other stuff that we'll figure out
   - add boolean for isBoardOfAdvisors to Subscriber class
   
