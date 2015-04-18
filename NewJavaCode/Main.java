@@ -34,4 +34,8 @@ public class Main {
 		gui = new MainGUI();
 		gui.setVisible(true);
 	}
+	
+	public void refreshGUILists(){
+		gui.refreshLists();
+	}
 }

@@ -7,41 +7,23 @@ public class AdCompanyDatabase implements Serializable{
 	
 	private static final long serialVersionUID = -8040534924097812533L;
 	
-	private ArrayList<AdCompany> activeCompanies;
-	private ArrayList<AdCompany> inactiveCompanies;
-	private ArrayList<AdCompany> doNotMailCompanies;
+	private ArrayList<AdCompany> adCompanies;
+	
 	
 	public AdCompanyDatabase(){
-		activeCompanies = new ArrayList<AdCompany>();
-		inactiveCompanies = new ArrayList<AdCompany>();
-		doNotMailCompanies = new ArrayList<AdCompany>();
+		adCompanies = new ArrayList<AdCompany>();
+		
 	}
 	
 	public void addNewCompany(AdCompany ac){
-		activeCompanies.add(ac);
+		adCompanies.add(ac);
 	}
 	
-	public boolean moveCompanyToDoNotMail(AdCompany ac){
-		if(inactiveCompanies.contains(ac)){
-			doNotMailCompanies.add(ac);
-			inactiveCompanies.remove(ac);
-			return true;
-		}
-		return false;
+	
+	public ArrayList<AdCompany> getAdCompanies(){
+		return adCompanies;
 	}
 	
-
-	public ArrayList<AdCompany> getActiveCompanies(){
-		return activeCompanies;
-	}
-	
-	public ArrayList<AdCompany> getInactiveCompanies(){
-		return inactiveCompanies;
-	}
-	
-	public ArrayList<AdCompany> getDoNotMailCompanies(){
-		return doNotMailCompanies;
-	}
 	
 	
 	

@@ -15,6 +15,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
 
 
 
@@ -38,17 +41,16 @@ public class MainGUI extends JFrame {
 	JRadioButton rbInactiveSubscribers;
 	JRadioButton rbDoNotMailSubscribers;
 	JRadioButton rbActiveAdCompanies;
-	JRadioButton rbInactiveAdCompanies;
-	JRadioButton rbDoNotMailCompanies;
 	
 	ArrayList<Magazine> publishedMagazines;
 	ArrayList<Magazine> inProgressMagazines;
 	ArrayList<Subscriber> activeSubscribers;
 	ArrayList<Subscriber> inactiveSubscribers;
 	ArrayList<Subscriber> doNotMailSubscribers;
-	ArrayList<AdCompany> activeAdCompanies;
+	ArrayList<AdCompany> adCompanies;
 	ArrayList<AdCompany> inactiveAdCompanies;
 	ArrayList<AdCompany> doNotMailAdCompanies;
+	private JTextField textField;
 	
 	
 	
@@ -92,7 +94,7 @@ public class MainGUI extends JFrame {
 		btnLoad = new JButton("Load");
 		btnLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Loaded!");
+				Main.getInstance().getDatabase().load();
 			}
 		});
 		btnLoad.setBounds(10, 279, 89, 23);
@@ -174,24 +176,6 @@ public class MainGUI extends JFrame {
 		rbActiveAdCompanies.setBounds(308, 105, 161, 23);
 		getContentPane().add(rbActiveAdCompanies);
 		
-		rbInactiveAdCompanies = new JRadioButton("Inactive Ad Companies");
-		rbInactiveAdCompanies.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				refreshSelectionList();
-			}
-		});
-		rbInactiveAdCompanies.setBounds(308, 125, 161, 23);
-		getContentPane().add(rbInactiveAdCompanies);
-		
-		rbDoNotMailCompanies = new JRadioButton("Do Not Mail Ad Companies");
-		rbDoNotMailCompanies.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				refreshSelectionList();
-			}
-		});
-		rbDoNotMailCompanies.setBounds(308, 145, 179, 23);
-		getContentPane().add(rbDoNotMailCompanies);
-		
 		
 		
 		bg = new ButtonGroup();
@@ -201,8 +185,6 @@ public class MainGUI extends JFrame {
 		bg.add(rbDoNotMailSubscribers);
 		bg.add(rbActiveSubscribers);
 		bg.add(rbActiveAdCompanies);
-		bg.add(rbInactiveAdCompanies);
-		bg.add(rbDoNotMailCompanies);
 		
 		
 	}
@@ -226,9 +208,8 @@ public class MainGUI extends JFrame {
 		activeSubscribers = sdb.getActiveSubscribers();
 		inactiveSubscribers = sdb.getInactiveSubscribers();
 		doNotMailSubscribers = sdb.getDoNotMailSubscribers();
-		activeAdCompanies = adb.getActiveCompanies();
-		inactiveAdCompanies = adb.getInactiveCompanies();
-		doNotMailAdCompanies = adb.getDoNotMailCompanies();
+		adCompanies = adb.getAdCompanies();
+		
 		
 		
 	}
@@ -243,9 +224,8 @@ public class MainGUI extends JFrame {
 		activeSubscribers = sdb.getActiveSubscribers();
 		inactiveSubscribers = sdb.getInactiveSubscribers();
 		doNotMailSubscribers = sdb.getDoNotMailSubscribers();
-		activeAdCompanies = adb.getActiveCompanies();
-		inactiveAdCompanies = adb.getInactiveCompanies();
-		doNotMailAdCompanies = adb.getDoNotMailCompanies();
+		adCompanies = adb.getAdCompanies();
+		
 		
 		refreshSelectionList();
 	}
@@ -264,27 +244,37 @@ public class MainGUI extends JFrame {
 		}else if(rbPublishedMagazines.isSelected()){
 			selectionList.setListData(publishedMagazines.toArray());	
 		}else if(rbActiveAdCompanies.isSelected()){
-			selectionList.setListData(activeAdCompanies.toArray());	
-		}else if(rbInactiveAdCompanies.isSelected()){
-			selectionList.setListData(inactiveAdCompanies.toArray());	
-		}else if(rbDoNotMailCompanies.isSelected()){
-			selectionList.setListData(doNotMailAdCompanies.toArray());	
-		}	
+			selectionList.setListData(adCompanies.toArray());	
+		}
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void initMisc(){
-		selectionList = new JList();
-		selectionList.setListData(activeSubscribers.toArray());
-		selectionList.setVisibleRowCount(-1);
-		selectionList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		jsp = new JScrollPane(selectionList);
-		jsp.setLocation(10, 10);
+		jsp = new JScrollPane();
+		jsp.setLocation(10, 40);
 		jsp.setSize(250, 150);
 		jsp.setEnabled(true);
 	
 		getContentPane().add(jsp);
+		selectionList = new JList();
+		jsp.setViewportView(selectionList);
+		selectionList.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getClickCount() == 2){
+					if(rbInProgressMagazines.isSelected()){
+						Magazine mag = Main.getInstance().getDatabase().getMagazineDatabase().getInProgressMagazines()
+								.get(selectionList.getSelectedIndex());
+						EditMagazineGUI emGUI = new EditMagazineGUI(mag);
+						emGUI.setVisible(true);
+					}
+				}
+			}
+		});
+		selectionList.setListData(activeSubscribers.toArray());
+		selectionList.setVisibleRowCount(-1);
+		selectionList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		JButton btnAddAdCompany = new JButton("Add Ad Company");
 		btnAddAdCompany.addActionListener(new ActionListener() {
@@ -295,6 +285,15 @@ public class MainGUI extends JFrame {
 		});
 		btnAddAdCompany.setBounds(390, 241, 134, 25);
 		getContentPane().add(btnAddAdCompany);
+		
+		textField = new JTextField();
+		textField.setBounds(10, 8, 116, 22);
+		getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JButton btnSearch = new JButton("Search");
+		btnSearch.setBounds(134, 8, 97, 22);
+		getContentPane().add(btnSearch);
 		
 		
 	}

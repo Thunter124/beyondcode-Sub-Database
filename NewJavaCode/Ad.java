@@ -24,4 +24,9 @@ public class Ad implements Serializable{
 	public void setAdName(String adName){
 		this.adName = adName;
 	}
+	
+	@Override
+	public String toString(){
+		return adName = "(" + owner.getBillingName() + ")";
+	}
 }

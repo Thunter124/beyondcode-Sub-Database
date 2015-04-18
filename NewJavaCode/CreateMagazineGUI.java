@@ -16,15 +16,16 @@ public class CreateMagazineGUI extends JFrame{
 
 	private static final long serialVersionUID = 8396454331021655953L;
 	
-	private JTextField tfTitle;
-	private JTextField tfVolumeNum;
-	private JTextField tfIssueNum;
+	protected JTextField tfTitle;
+	protected JTextField tfVolumeNum;
+	protected JTextField tfIssueNum;
 	
-	JButton btnApply;
-	JButton btnCancel;
-	private JLabel lblTitle;
-	private JLabel lblVolume;
-	private JLabel lblIssue;
+	protected JButton btnApply;
+	protected JButton btnCancel;
+	
+	protected JLabel lblTitle;
+	protected JLabel lblVolume;
+	protected JLabel lblIssue;
 	
 	public CreateMagazineGUI() {
 		
@@ -73,7 +74,17 @@ public class CreateMagazineGUI extends JFrame{
 	}
 	
 	private void initLabels(){
+		lblTitle = new JLabel("Title:");
+		lblTitle.setBounds(20, 80, 56, 16);
+		getContentPane().add(lblTitle);
+	
+		lblVolume = new JLabel("Volume:");
+		lblVolume.setBounds(179, 80, 56, 16);
+		getContentPane().add(lblVolume);
 		
+		lblIssue = new JLabel("Issue:");
+		lblIssue.setBounds(322, 80, 56, 16);
+		getContentPane().add(lblIssue);
 	}
 	
 	private void initTextFields(){
@@ -92,17 +103,6 @@ public class CreateMagazineGUI extends JFrame{
 		getContentPane().add(tfIssueNum);
 		tfIssueNum.setColumns(10);
 		
-		lblTitle = new JLabel("Title:");
-		lblTitle.setBounds(20, 80, 56, 16);
-		getContentPane().add(lblTitle);
-		
-		lblVolume = new JLabel("Volume:");
-		lblVolume.setBounds(179, 80, 56, 16);
-		getContentPane().add(lblVolume);
-		
-		lblIssue = new JLabel("Issue:");
-		lblIssue.setBounds(322, 80, 56, 16);
-		getContentPane().add(lblIssue);
 	}
 	
 	

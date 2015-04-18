@@ -1,6 +1,9 @@
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 
@@ -49,6 +52,13 @@ public class Database {
 		return adb;
 	}
 	
+	public void printShippingLabels(){
+	
+	}
+	
+	
+	
+	
 	
 
 
@@ -57,7 +67,7 @@ public class Database {
 		dir.mkdir();
 		
 		try {
-			FileOutputStream fos = new FileOutputStream(dir.toString() + "/MagazineDatabase.bin" );
+			FileOutputStream fos = new FileOutputStream(dir.toString() + "/MagazineDatabase.bin");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(mdb);
 			oos.flush();
@@ -88,6 +98,34 @@ public class Database {
 	
 
 	public void load(){
+		File dir = new File("Databases");
+		dir.mkdir();
+		
+		try {
+			FileInputStream fis = new FileInputStream(dir.toString() + "/MagazineDatabase.bin");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			mdb = (MagazineDatabase) ois.readObject();
+			ois.close();
+			fis.close();
+			
+			fis = new FileInputStream(dir.toString() + "/SubscriberDatabase.bin");
+			ois = new ObjectInputStream(fis);
+			sdb = (SubscriberDatabase) ois.readObject();
+			ois.close();
+			fis.close();
+			
+			fis = new FileInputStream(dir.toString() + "/AdCompanyDatabase.bin");
+			ois = new ObjectInputStream(fis);
+			adb = (AdCompanyDatabase) ois.readObject();
+			ois.close();
+			fis.close();
+			
+			gui.refreshLists();
+			
+		} catch (IOException | ClassNotFoundException e) {
+			System.out.println("Failed to load file!");
+			e.printStackTrace();
+		} 
 		
 	}	
 

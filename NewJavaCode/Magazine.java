@@ -17,6 +17,7 @@ public class Magazine implements Serializable{
 		this.volumeNum = volumeNum;
 		this.issueNum = issueNum;
 		articles = new ArrayList<Article>();
+		ads = new ArrayList<Ad>();
 	}
 	
 	//returns true if the article was added. returns false if the article was a duplicate
