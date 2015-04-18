@@ -95,6 +95,13 @@ public class EditMagazineGUI extends CreateMagazineGUI{
 		getContentPane().add(btnAddAd);
 		
 		btnAddArticle = new JButton("Add Article");
+		btnAddArticle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AddArticleToMagazineGUI aatm = new AddArticleToMagazineGUI(mag);
+				aatm.setVisible(true);
+				aatm.setTitle("Add Article to Magazine");
+			}
+		});
 		btnAddArticle.setBounds(12, 227, 97, 25);
 		getContentPane().add(btnAddArticle);
 		

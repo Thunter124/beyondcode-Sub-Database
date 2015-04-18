@@ -1,25 +1,20 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-
 
 public class Main {
 	
 	MainGUI gui;
-	private static Main main;
+	private static Main instance;
 	private Database database;
 	
 	private Main(){
-		main = this;
+		instance = this;
 		database = new Database();
 		initGUI();
 		database.setGUI(gui);
+		database.load();
 	}
 	
 	public static Main getInstance(){
-		return main;
+		return instance;
 	}
 	
 	public Database getDatabase(){

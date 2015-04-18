@@ -41,6 +41,7 @@ public class MainGUI extends JFrame {
 	JRadioButton rbInactiveSubscribers;
 	JRadioButton rbDoNotMailSubscribers;
 	JRadioButton rbActiveAdCompanies;
+	JRadioButton rbAuthors;
 	
 	ArrayList<Magazine> publishedMagazines;
 	ArrayList<Magazine> inProgressMagazines;
@@ -50,14 +51,16 @@ public class MainGUI extends JFrame {
 	ArrayList<AdCompany> adCompanies;
 	ArrayList<AdCompany> inactiveAdCompanies;
 	ArrayList<AdCompany> doNotMailAdCompanies;
+	ArrayList<Author> authors;
+	
 	private JTextField textField;
+	private JButton btnAddAuthor;
 	
 	
 	
 	public MainGUI() {
 		initWindow();
 		initButtons();
-		initLabels();
 		initLists();
 		initMisc();
 		
@@ -108,7 +111,7 @@ public class MainGUI extends JFrame {
 				csGui.setVisible(true);
 			}
 		});
-		btnAddSubscriber.setBounds(390, 207, 134, 23);
+		btnAddSubscriber.setBounds(390, 221, 134, 23);
 		getContentPane().add(btnAddSubscriber);
 	//add magazine
 		btnAddMagazine = new JButton("Add Magazine");
@@ -167,7 +170,7 @@ public class MainGUI extends JFrame {
 		rbDoNotMailSubscribers.setBounds(308, 85, 190, 23);
 		getContentPane().add(rbDoNotMailSubscribers);
 		
-		rbActiveAdCompanies = new JRadioButton("Active Ad Companies");
+		rbActiveAdCompanies = new JRadioButton("Ad Companies");
 		rbActiveAdCompanies.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				refreshSelectionList();
@@ -175,6 +178,15 @@ public class MainGUI extends JFrame {
 		});
 		rbActiveAdCompanies.setBounds(308, 105, 161, 23);
 		getContentPane().add(rbActiveAdCompanies);
+		
+		rbAuthors = new JRadioButton("Authors");
+		rbAuthors.setBounds(308, 124, 127, 25);
+		rbAuthors.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				refreshSelectionList();
+			}
+		});
+		getContentPane().add(rbAuthors);
 		
 		
 		
@@ -185,17 +197,12 @@ public class MainGUI extends JFrame {
 		bg.add(rbDoNotMailSubscribers);
 		bg.add(rbActiveSubscribers);
 		bg.add(rbActiveAdCompanies);
+		bg.add(rbAuthors);
 		
 		
 	}
 	
-	private void initLabels(){
-		
-	
-		
-		
-		
-	}
+
 
 	private void initLists(){
 		
@@ -209,9 +216,7 @@ public class MainGUI extends JFrame {
 		inactiveSubscribers = sdb.getInactiveSubscribers();
 		doNotMailSubscribers = sdb.getDoNotMailSubscribers();
 		adCompanies = adb.getAdCompanies();
-		
-		
-		
+		authors = sdb.getAuthors();
 	}
 	
 	public void refreshLists(){
@@ -225,6 +230,7 @@ public class MainGUI extends JFrame {
 		inactiveSubscribers = sdb.getInactiveSubscribers();
 		doNotMailSubscribers = sdb.getDoNotMailSubscribers();
 		adCompanies = adb.getAdCompanies();
+		authors = sdb.getAuthors();
 		
 		
 		refreshSelectionList();
@@ -245,6 +251,8 @@ public class MainGUI extends JFrame {
 			selectionList.setListData(publishedMagazines.toArray());	
 		}else if(rbActiveAdCompanies.isSelected()){
 			selectionList.setListData(adCompanies.toArray());	
+		}else if (rbAuthors.isSelected()){
+			selectionList.setListData(authors.toArray());
 		}
 	}
 	
@@ -283,7 +291,7 @@ public class MainGUI extends JFrame {
 				caGUI.setVisible(true);
 			}
 		});
-		btnAddAdCompany.setBounds(390, 241, 134, 25);
+		btnAddAdCompany.setBounds(390, 247, 134, 25);
 		getContentPane().add(btnAddAdCompany);
 		
 		textField = new JTextField();
@@ -294,6 +302,20 @@ public class MainGUI extends JFrame {
 		JButton btnSearch = new JButton("Search");
 		btnSearch.setBounds(134, 8, 97, 22);
 		getContentPane().add(btnSearch);
+		
+		btnAddAuthor = new JButton("Add Author");
+		btnAddAuthor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CreateAuthorGUI caGUI = new CreateAuthorGUI();
+				caGUI.setVisible(true);
+			
+				
+			}
+		});
+		btnAddAuthor.setBounds(390, 196, 134, 25);
+		getContentPane().add(btnAddAuthor);
+		
+	
 		
 		
 	}

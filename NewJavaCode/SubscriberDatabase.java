@@ -9,12 +9,24 @@ public class SubscriberDatabase implements Serializable{
 	private ArrayList<Subscriber> activeSubscribers;
 	private ArrayList<Subscriber> inactiveSubscribers;
 	private ArrayList<Subscriber> doNotMailSubscribers;
+	private ArrayList<Author> authors;
 	
 	
 	public SubscriberDatabase(){
 		activeSubscribers = new ArrayList<Subscriber>();
 		inactiveSubscribers = new ArrayList<Subscriber>();
 		doNotMailSubscribers = new ArrayList<Subscriber>();
+		authors = new ArrayList<Author>();
+	}
+	
+	public void addNewAuthor(Author author){
+		if(authors == null)
+			System.out.println("authors in null");
+		authors.add(author);
+	}
+	
+	public ArrayList<Author> getAuthors(){
+		return authors;
 	}
 	
 	public void addNewSubscriber(Subscriber sub){

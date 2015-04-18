@@ -7,10 +7,10 @@ public class Subscriber implements Serializable{
 
 
 	private static final long serialVersionUID = 1786967556061021051L;
-	private List<ShippingAddress> addresses;
-	private int copiesRemaining;
-	private String billingName;
-	private String billingAddress;
+	protected List<ShippingAddress> addresses;
+	protected int copiesRemaining;
+	protected String billingName;
+	protected String billingAddress;
 	
 	public Subscriber(String billingName, String billingAddress, int startingCopies){
 		 
@@ -45,19 +45,19 @@ public class Subscriber implements Serializable{
          return --copiesRemaining == 0;
     }
     
-    void setBillingAddress(String billingAddress){
+    public void setBillingAddress(String billingAddress){
          this.billingAddress = billingAddress;
     }
 
-    String getBillingAddress(){
+    public String getBillingAddress(){
          return billingAddress;
     }
 
-    void setBillingName(String billingName){
+    public void setBillingName(String billingName){
          this.billingName = billingName;
     }
 
-    String getBillingName(){
+    public String getBillingName(){
          return billingName;
     }
 

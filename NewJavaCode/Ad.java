@@ -27,6 +27,6 @@ public class Ad implements Serializable{
 	
 	@Override
 	public String toString(){
-		return adName = "(" + owner.getBillingName() + ")";
+		return adName + "(" + owner.getBillingName() + ")";
 	}
 }

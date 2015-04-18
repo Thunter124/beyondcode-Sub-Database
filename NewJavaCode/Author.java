@@ -19,5 +19,10 @@ public class Author extends Subscriber{
 		++articlesPublished;
 	}
 	
+	@Override
+	public String toString(){
+		return billingName;
+	}
+	
 
 }

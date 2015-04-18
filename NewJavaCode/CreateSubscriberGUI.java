@@ -22,29 +22,29 @@ public class CreateSubscriberGUI extends JFrame {
 
 	private static final long serialVersionUID = 3805890009759996908L;
 	
-	private JTextField tfName;
-	private JTextField tfStreetAddress;
-	private JTextField tfCityState;
-	private JTextField tfZipCode;
-	private JTextField tfStartingCopies;
-	private JTextField tfNumAddresses;
-	private JTextField tfCopiesPerAddressSingle;
+	protected JTextField tfName;
+	protected JTextField tfStreetAddress;
+	protected JTextField tfCityState;
+	protected JTextField tfZipCode;
+	protected JTextField tfStartingCopies;
+	protected JTextField tfNumAddresses;
+	protected JTextField tfCopiesPerAddressSingle;
 	
-	private JButton btnApply;
-	private JCheckBox cbSameAddress;
+	protected JButton btnApply;
+	protected JCheckBox cbSameAddress;
 	
-	private boolean validTextFields = false;
+	protected boolean validTextFields = false;
 	private Subscriber sub = null;
 	Main main;
-	private CreateSubscriberGUI _this;
-	private JLabel lblName;
-	private JLabel lblStreetAddress;
-	private JLabel lblStartingCopies;
-	private JLabel lblNumAddresses;
-	private JLabel lblCityState;
-	private JLabel lblZipCode;
-	private JLabel lblSameAddress;
-	private JLabel lblCopiesPerAddress;
+	protected CreateSubscriberGUI _this;
+	protected JLabel lblName;
+	protected JLabel lblStreetAddress;
+	protected JLabel lblStartingCopies;
+	protected JLabel lblNumAddresses;
+	protected JLabel lblCityState;
+	protected JLabel lblZipCode;
+	protected JLabel lblSameAddress;
+	protected JLabel lblCopiesPerAddress;
 	
 	
 	public CreateSubscriberGUI() {

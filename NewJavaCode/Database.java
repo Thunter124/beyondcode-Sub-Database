@@ -39,6 +39,12 @@ public class Database {
 		gui.refreshLists();
 	}
 	
+	public void passNewAuthor(Author author){
+		sdb.addNewAuthor(author);
+		gui.refreshLists();
+	}
+	
+	
 
 	public MagazineDatabase getMagazineDatabase(){
 		return mdb;
@@ -56,11 +62,6 @@ public class Database {
 	
 	}
 	
-	
-	
-	
-	
-
 
 	public void save(){
 		File dir = new File("Databases");
