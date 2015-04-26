@@ -1,7 +1,12 @@
+package com.beyondcode.gui;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JOptionPane;
+
+import com.beyondcode.core.Author;
+import com.beyondcode.core.ShippingAddress;
+import com.beyondcode.main.Main;
 
 public class CreateAuthorGUI extends CreateSubscriberGUI{
 
@@ -43,10 +48,9 @@ public class CreateAuthorGUI extends CreateSubscriberGUI{
 		tfCopiesPerAddressSingle.setVisible(false);
 		tfCopiesPerAddressSingle.setEnabled(false);
 		cbSameAddress.setVisible(false);
-		
-		
-		
-		
+		btnNext.setEnabled(false);
+		btnNext.setVisible(false);
+
 	}
 	
 

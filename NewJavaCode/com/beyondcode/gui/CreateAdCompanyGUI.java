@@ -1,3 +1,4 @@
+package com.beyondcode.gui;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -7,16 +8,25 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import com.beyondcode.core.AdCompany;
+import com.beyondcode.core.ShippingAddress;
+import com.beyondcode.main.Main;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class CreateAdCompanyGUI extends JFrame {
 
 	private static final long serialVersionUID = 27638576650944154L;
-	private JTextField tfZipCode;
-	private JTextField tfCityState;
-	private JTextField tfStreetAddress;
-	private JTextField tfName;
+	protected JTextField tfZipCode;
+	protected JTextField tfCityState;
+	protected JTextField tfStreetAddress;
+	protected JTextField tfName;
+	protected JButton btnApply;
+	protected JLabel lblCityState;
+	protected JLabel lblAddress;
+	protected JLabel lblZipCode;
+	protected JLabel lblCompanyName;
 
 	public CreateAdCompanyGUI() {
 		setTitle("Ad Company Information");
@@ -28,21 +38,25 @@ public class CreateAdCompanyGUI extends JFrame {
 
 	private void initLabels() {
 
-		JLabel label_1 = new JLabel("City, State:");
-		label_1.setBounds(12, 77, 97, 16);
-		getContentPane().add(label_1);
+		lblCityState = new JLabel("City, State:");
+		lblCityState.setBounds(12, 77, 97, 16);
+		getContentPane().add(lblCityState);
 
-		JLabel label_2 = new JLabel("Street Address:");
-		label_2.setBounds(236, 28, 97, 16);
-		getContentPane().add(label_2);
+		lblAddress = new JLabel("Street Address:");
+		lblAddress.setBounds(236, 28, 97, 16);
+		getContentPane().add(lblAddress);
 
-		JLabel label_3 = new JLabel("Zip Code:");
-		label_3.setBounds(236, 78, 56, 16);
-		getContentPane().add(label_3);
+		lblZipCode = new JLabel("Zip Code:");
+		lblZipCode.setBounds(236, 78, 56, 16);
+		getContentPane().add(lblZipCode);
+		
+		lblCompanyName = new JLabel("Company Name:");
+		lblCompanyName.setBounds(12, 28, 97, 16);
+		getContentPane().add(lblCompanyName);
 	}
 	
 	private void initButtons(){
-		JButton btnApply = new JButton("Apply");
+		btnApply = new JButton("Apply");
 		btnApply.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!(tfName.getText().equals("") || tfStreetAddress.getText().equals("") 
@@ -102,11 +116,6 @@ public class CreateAdCompanyGUI extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 
-		JLabel lblCompanyName = new JLabel("Company Name:");
-		lblCompanyName.setBounds(12, 28, 97, 16);
-		getContentPane().add(lblCompanyName);
-
-		
 		this.setSize(450, 300);
 		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

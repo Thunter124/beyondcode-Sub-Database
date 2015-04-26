@@ -1,3 +1,4 @@
+package com.beyondcode.gui;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -7,6 +8,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
+
+
+
+
+import com.beyondcode.core.Magazine;
+import com.beyondcode.main.Main;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

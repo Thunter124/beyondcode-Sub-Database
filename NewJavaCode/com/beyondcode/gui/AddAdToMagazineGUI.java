@@ -1,3 +1,4 @@
+package com.beyondcode.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -7,6 +8,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import com.beyondcode.core.Ad;
+import com.beyondcode.core.AdCompany;
+import com.beyondcode.databases.AdCompanyDatabase;
+import com.beyondcode.core.Magazine;
+import com.beyondcode.main.Main;
 
 public class AddAdToMagazineGUI extends AddGenericObjectGUI{
 
@@ -18,6 +25,7 @@ public class AddAdToMagazineGUI extends AddGenericObjectGUI{
 	
 	@SuppressWarnings("unchecked")
 	public AddAdToMagazineGUI(final Magazine mag, final EditMagazineGUI emGUI){
+		jsp.setLocation(10, 25);
 		this.emGUI = emGUI;
 		this.mag = mag;
 		
@@ -55,8 +63,8 @@ public class AddAdToMagazineGUI extends AddGenericObjectGUI{
 		lblTitle.setBounds(316, 12, 56, 16);
 		getContentPane().add(lblTitle);
 		
-		JButton btnNewButton = new JButton("Create New Ad Company");
-		btnNewButton.setBounds(10, 227, 188, 25);
-		getContentPane().add(btnNewButton);
+		JLabel lblSelectAdCompany = new JLabel("Select Ad Company:");
+		lblSelectAdCompany.setBounds(10, 8, 130, 16);
+		getContentPane().add(lblSelectAdCompany);
 	}
 }

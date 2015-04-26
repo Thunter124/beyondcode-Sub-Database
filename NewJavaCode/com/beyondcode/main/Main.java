@@ -1,3 +1,7 @@
+package com.beyondcode.main;
+import com.beyondcode.databases.Database;
+import com.beyondcode.gui.MainGUI;
+
 
 public class Main {
 	

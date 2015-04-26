@@ -1,6 +1,10 @@
+package com.beyondcode.databases;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.beyondcode.core.Author;
+import com.beyondcode.core.Subscriber;
 
 
 public class SubscriberDatabase implements Serializable{

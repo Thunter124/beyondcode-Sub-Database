@@ -1,3 +1,4 @@
+package com.beyondcode.core;
 import java.io.Serializable;
 
 
@@ -17,25 +18,29 @@ public class ShippingAddress implements Serializable{
         this.copiesPerIssue = copiesPerIssue;
     }
 
-	String getName(){
+	public String getName(){
         return name;
     }
-    void setName(String name){
+	public void setName(String name){
         this.name = name;
     }
     
-    String getAddress(){
+	public String getAddress(){
         return address;
     }
-    void setAddress(String address){
+	public void setAddress(String address){
         this.address = address;
     }
     
-    int getCopiesPerIssue(){
+	public int getCopiesPerIssue(){
         return copiesPerIssue;
     }
-    void setCopiesPerIssue(int copiesPerIssue){
+	public void setCopiesPerIssue(int copiesPerIssue){
         this.copiesPerIssue = copiesPerIssue;
+    }
+    
+    public String toString(){
+    	return address;
     }
 	
 }

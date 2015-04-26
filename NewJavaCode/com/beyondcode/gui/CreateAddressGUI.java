@@ -1,3 +1,4 @@
+package com.beyondcode.gui;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -8,6 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import com.beyondcode.core.ShippingAddress;
+import com.beyondcode.core.Subscriber;
 
 
 public class CreateAddressGUI extends JFrame {
@@ -24,11 +28,16 @@ public class CreateAddressGUI extends JFrame {
 	private JTextField tfCopiesPerIssue;
 	private Subscriber newSub;
 	private CreateSubscriberGUI csGUI;
+	protected EditSubscriberGUI esGUI;
+	protected boolean calledFromCSGUI;
 
-	public CreateAddressGUI(int currentAddressNum, int numAddresses, Subscriber newSub, CreateSubscriberGUI csGUI) {
+	public CreateAddressGUI(int currentAddressNum, int numAddresses, Subscriber newSub, CreateSubscriberGUI csGUI, boolean calledFromCSGUI) {
 		numAddressesLeft = numAddresses;
 		this.currentAddressNum = currentAddressNum;
-		this.csGUI = csGUI;
+		this.calledFromCSGUI = calledFromCSGUI;
+		if(calledFromCSGUI)
+			this.csGUI = csGUI;
+		
 		
 		this.newSub = newSub;
 		initWindow();
@@ -50,6 +59,9 @@ public class CreateAddressGUI extends JFrame {
 
 	private void initButtons() {
 		JButton btnNext = new JButton("Next");
+		if(!calledFromCSGUI)
+			btnNext.setText("Apply");
+			
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!(tfName.getText().equals("")
@@ -70,12 +82,15 @@ public class CreateAddressGUI extends JFrame {
 							ShippingAddress newAddress = new ShippingAddress(name, address, copiesPerIssue);
 							newSub.addAddress(newAddress);
 							if(currentAddressNum == numAddressesLeft){
-								csGUI.enableApplyButton(newSub);
-								dispose();
+								if(calledFromCSGUI)
+									csGUI.enableApplyButton(newSub);
+								else{
+									esGUI.refreshSelectionList();
+								}
+								dispose();	
 							}else{
-								CreateAddressGUI caGUI = new CreateAddressGUI(++currentAddressNum, numAddressesLeft, newSub, csGUI);
+								CreateAddressGUI caGUI = new CreateAddressGUI(++currentAddressNum, numAddressesLeft, newSub, csGUI, true);
 								caGUI.setVisible(true);
-								dispose();
 							}
 								
 							
@@ -163,5 +178,9 @@ public class CreateAddressGUI extends JFrame {
 		lblZipCode.setBounds(250, 120, 56, 16);
 		getContentPane().add(lblZipCode);
 
+	}
+	
+	public void setESGUI(EditSubscriberGUI esGUI){
+		this.esGUI = esGUI;
 	}
 }

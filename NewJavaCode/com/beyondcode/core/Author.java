@@ -1,3 +1,4 @@
+package com.beyondcode.core;
 
 public class Author extends Subscriber{
 
@@ -6,7 +7,7 @@ public class Author extends Subscriber{
 	private int articlesPublished;
 	
 	
-	Author(String billingName, String billingAddress, int startingCopies) {
+	public Author(String billingName, String billingAddress, int startingCopies) {
 		super(billingName, billingAddress, startingCopies);
 		articlesPublished = 0;
 	}

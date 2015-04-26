@@ -1,3 +1,4 @@
+package com.beyondcode.core;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,13 @@ public class Subscriber implements Serializable{
 	public void addAddress(ShippingAddress address){
 		addresses.add(address);
 	}
+	
+	public void removeAddressAt(int i){
+		if(i < addresses.size()){
+			addresses.remove(i);
+		}
+	}
+	
 	public List<ShippingAddress> getAddresses(){
 		return addresses;
 	}

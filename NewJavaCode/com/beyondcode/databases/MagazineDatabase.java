@@ -1,6 +1,9 @@
+package com.beyondcode.databases;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.beyondcode.core.Magazine;
 
 
 public class MagazineDatabase implements Serializable{

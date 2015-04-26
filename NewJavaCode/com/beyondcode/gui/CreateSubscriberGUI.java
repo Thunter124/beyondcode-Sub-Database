@@ -1,3 +1,4 @@
+package com.beyondcode.gui;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -9,14 +10,19 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import javax.swing.JCheckBox;
+
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+
+import com.beyondcode.core.ShippingAddress;
+import com.beyondcode.core.Subscriber;
+import com.beyondcode.main.Main;
 
 public class CreateSubscriberGUI extends JFrame {
 
@@ -31,10 +37,12 @@ public class CreateSubscriberGUI extends JFrame {
 	protected JTextField tfCopiesPerAddressSingle;
 	
 	protected JButton btnApply;
+	protected JButton btnNext;
+	protected JButton btnCancel;
 	protected JCheckBox cbSameAddress;
 	
 	protected boolean validTextFields = false;
-	private Subscriber sub = null;
+	protected Subscriber sub = null;
 	Main main;
 	protected CreateSubscriberGUI _this;
 	protected JLabel lblName;
@@ -128,7 +136,7 @@ public class CreateSubscriberGUI extends JFrame {
 	}
 	
 	private void initButtons(){
-		JButton btnNext = new JButton("Next");
+		btnNext = new JButton("Next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(!(tfName.getText().equals("") || tfStreetAddress.getText().equals("") || tfZipCode.getText().equals("") || 
@@ -162,7 +170,7 @@ public class CreateSubscriberGUI extends JFrame {
 						
 						if(validTextFields){
 							Subscriber newSub = new Subscriber(billingName, streetAddress + " " + cityState + " " +  zipCode, startingCopies);
-							CreateAddressGUI addressGUI = new CreateAddressGUI(1, numAddresses, newSub, _this);
+							CreateAddressGUI addressGUI = new CreateAddressGUI(1, numAddresses, newSub, _this, true);
 							addressGUI.setVisible(true);
 						
 						}
@@ -175,7 +183,7 @@ public class CreateSubscriberGUI extends JFrame {
 		btnNext.setBounds(117, 228, 89, 23);
 		getContentPane().add(btnNext);
 
-		JButton btnCancel = new JButton("Cancel");
+		btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
@@ -206,6 +214,9 @@ public class CreateSubscriberGUI extends JFrame {
 					}
 						
 					
+				}else{
+					Main.getInstance().getDatabase().passNewSubscriber(sub);
+					dispose();
 				}
 			}
 		});

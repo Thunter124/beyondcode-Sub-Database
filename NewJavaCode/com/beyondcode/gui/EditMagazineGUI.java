@@ -1,3 +1,4 @@
+package com.beyondcode.gui;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -9,6 +10,9 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+
+import com.beyondcode.core.Magazine;
+import com.beyondcode.main.Main;
 
 public class EditMagazineGUI extends CreateMagazineGUI{
 
@@ -22,6 +26,7 @@ public class EditMagazineGUI extends CreateMagazineGUI{
 	JRadioButton rdbtnArticles;
 	JRadioButton rdbtnAds;
 	private EditMagazineGUI _this;
+	private JButton btnPublishMagazine;
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public EditMagazineGUI(Magazine mag){
@@ -81,6 +86,10 @@ public class EditMagazineGUI extends CreateMagazineGUI{
 			selectionList.setVisibleRowCount(-1);
 			selectionList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			
+			btnPublishMagazine = new JButton("Publish Magazine");
+			btnPublishMagazine.setBounds(140, 199, 141, 25);
+			getContentPane().add(btnPublishMagazine);
+			
 	}
 	
 	private void initButtons(){
@@ -137,7 +146,7 @@ public class EditMagazineGUI extends CreateMagazineGUI{
 				dispose();
 			}
 		});
-		btnDeleteMagazine.setBounds(140, 228, 127, 25);
+		btnDeleteMagazine.setBounds(140, 227, 141, 25);
 		getContentPane().add(btnDeleteMagazine);
 	}
 	

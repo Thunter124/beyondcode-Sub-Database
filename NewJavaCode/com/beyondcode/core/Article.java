@@ -1,3 +1,4 @@
+package com.beyondcode.core;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,5 +29,9 @@ public class Article implements Serializable {
 	
 	public void setArticleName(String name){
 		articleName = name;
+	}
+	
+	public String toString(){
+		return articleName;
 	}
 }

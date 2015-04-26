@@ -1,10 +1,16 @@
+package com.beyondcode.databases;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import com.beyondcode.core.AdCompany;
+import com.beyondcode.core.Author;
+import com.beyondcode.core.Magazine;
+import com.beyondcode.core.Subscriber;
+import com.beyondcode.gui.MainGUI;
 
 
 public class Database {

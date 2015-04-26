@@ -1,3 +1,5 @@
+package com.beyondcode.gui;
+
 import java.awt.Dimension;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
@@ -6,84 +8,85 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JTextField;
 
-
+import com.beyondcode.core.AdCompany;
+import com.beyondcode.core.Author;
+import com.beyondcode.core.Magazine;
+import com.beyondcode.core.Subscriber;
+import com.beyondcode.databases.AdCompanyDatabase;
+import com.beyondcode.databases.MagazineDatabase;
+import com.beyondcode.databases.SubscriberDatabase;
+import com.beyondcode.main.Main;
 
 public class MainGUI extends JFrame {
-	
+
 	private static final long serialVersionUID = 6411499808530678723L;
-	
+
 	JList selectionList;
-	DefaultListModel dlm;
 	JScrollPane jsp;
 	ButtonGroup bg;
-	
+
 	JButton btnSave;
 	JButton btnLoad;
 	JButton btnAddSubscriber;
 	JButton btnAddMagazine;
-	
+
 	JRadioButton rbInProgressMagazines;
 	JRadioButton rbPublishedMagazines;
 	JRadioButton rbActiveSubscribers;
 	JRadioButton rbInactiveSubscribers;
 	JRadioButton rbDoNotMailSubscribers;
-	JRadioButton rbActiveAdCompanies;
+	JRadioButton rbAdCompanies;
 	JRadioButton rbAuthors;
-	
+
 	ArrayList<Magazine> publishedMagazines;
 	ArrayList<Magazine> inProgressMagazines;
 	ArrayList<Subscriber> activeSubscribers;
 	ArrayList<Subscriber> inactiveSubscribers;
 	ArrayList<Subscriber> doNotMailSubscribers;
 	ArrayList<AdCompany> adCompanies;
-	ArrayList<AdCompany> inactiveAdCompanies;
-	ArrayList<AdCompany> doNotMailAdCompanies;
 	ArrayList<Author> authors;
-	
+
 	private JTextField textField;
 	private JButton btnAddAuthor;
-	
-	
-	
+
 	public MainGUI() {
 		initWindow();
 		initButtons();
 		initLists();
 		initMisc();
-		
-		
+
 	}
-	
-	
-	private void initWindow(){
-	//basic window attributes
-		setTitle("Beyond Code"); 
-		getContentPane().setBackground(SystemColor.control); 
-		this.setSize(540, 340); 
+
+	private void initWindow() {
+		// basic window attributes
+		setTitle("Beyond Code");
+		getContentPane().setBackground(SystemColor.control);
+		this.setSize(540, 340);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
-		
-		//start window in the center of the screen, regardless of screen resolution
+
+		// start window in the center of the screen, regardless of screen
+		// resolution
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation(dim.width/2 - this.getWidth()/2, dim.height/2 - this.getHeight()/2 - dim.height/8);
+		this.setLocation(dim.width / 2 - this.getWidth() / 2, dim.height / 2
+				- this.getHeight() / 2 - dim.height / 8);
 	}
-	
-	private void initButtons(){
-	//save button
+
+	private void initButtons() {
+		// save button
 		btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -92,8 +95,8 @@ public class MainGUI extends JFrame {
 		});
 		btnSave.setBounds(10, 257, 89, 23);
 		getContentPane().add(btnSave);
-	
-	//load button
+
+		// load button
 		btnLoad = new JButton("Load");
 		btnLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -102,8 +105,8 @@ public class MainGUI extends JFrame {
 		});
 		btnLoad.setBounds(10, 279, 89, 23);
 		getContentPane().add(btnLoad);
-		
-	//add subscriber
+
+		// add subscriber
 		btnAddSubscriber = new JButton("Add Subscriber");
 		btnAddSubscriber.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -113,7 +116,7 @@ public class MainGUI extends JFrame {
 		});
 		btnAddSubscriber.setBounds(390, 221, 134, 23);
 		getContentPane().add(btnAddSubscriber);
-	//add magazine
+		// add magazine
 		btnAddMagazine = new JButton("Add Magazine");
 		btnAddMagazine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -123,7 +126,7 @@ public class MainGUI extends JFrame {
 		});
 		btnAddMagazine.setBounds(390, 274, 134, 23);
 		getContentPane().add(btnAddMagazine);
-		
+
 		rbPublishedMagazines = new JRadioButton("Published Magazines");
 		rbPublishedMagazines.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -132,7 +135,7 @@ public class MainGUI extends JFrame {
 		});
 		rbPublishedMagazines.setBounds(308, 5, 161, 15);
 		getContentPane().add(rbPublishedMagazines);
-		
+
 		rbInProgressMagazines = new JRadioButton("Magazines In Progress");
 		rbInProgressMagazines.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -141,7 +144,7 @@ public class MainGUI extends JFrame {
 		});
 		rbInProgressMagazines.setBounds(308, 25, 161, 23);
 		getContentPane().add(rbInProgressMagazines);
-		
+
 		rbActiveSubscribers = new JRadioButton("Active Subscribers");
 		rbActiveSubscribers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -151,7 +154,7 @@ public class MainGUI extends JFrame {
 		rbActiveSubscribers.setSelected(true);
 		rbActiveSubscribers.setBounds(308, 45, 161, 23);
 		getContentPane().add(rbActiveSubscribers);
-		
+
 		rbInactiveSubscribers = new JRadioButton("Inactive Subscribers");
 		rbInactiveSubscribers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -160,7 +163,7 @@ public class MainGUI extends JFrame {
 		});
 		rbInactiveSubscribers.setBounds(308, 65, 161, 23);
 		getContentPane().add(rbInactiveSubscribers);
-		
+
 		rbDoNotMailSubscribers = new JRadioButton("Do Not Mail Subscribers");
 		rbDoNotMailSubscribers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -169,16 +172,16 @@ public class MainGUI extends JFrame {
 		});
 		rbDoNotMailSubscribers.setBounds(308, 85, 190, 23);
 		getContentPane().add(rbDoNotMailSubscribers);
-		
-		rbActiveAdCompanies = new JRadioButton("Ad Companies");
-		rbActiveAdCompanies.addActionListener(new ActionListener() {
+
+		rbAdCompanies = new JRadioButton("Ad Companies");
+		rbAdCompanies.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				refreshSelectionList();
 			}
 		});
-		rbActiveAdCompanies.setBounds(308, 105, 161, 23);
-		getContentPane().add(rbActiveAdCompanies);
-		
+		rbAdCompanies.setBounds(308, 105, 161, 23);
+		getContentPane().add(rbAdCompanies);
+
 		rbAuthors = new JRadioButton("Authors");
 		rbAuthors.setBounds(308, 124, 127, 25);
 		rbAuthors.addActionListener(new ActionListener() {
@@ -187,29 +190,27 @@ public class MainGUI extends JFrame {
 			}
 		});
 		getContentPane().add(rbAuthors);
-		
-		
-		
+
 		bg = new ButtonGroup();
 		bg.add(rbInProgressMagazines);
 		bg.add(rbPublishedMagazines);
 		bg.add(rbInactiveSubscribers);
 		bg.add(rbDoNotMailSubscribers);
 		bg.add(rbActiveSubscribers);
-		bg.add(rbActiveAdCompanies);
+		bg.add(rbAdCompanies);
 		bg.add(rbAuthors);
-		
-		
+
 	}
-	
 
+	private void initLists() {
 
-	private void initLists(){
-		
-		MagazineDatabase mdb = Main.getInstance().getDatabase().getMagazineDatabase();
-		SubscriberDatabase sdb = Main.getInstance().getDatabase().getSubscriberDatabase();
-		AdCompanyDatabase adb = Main.getInstance().getDatabase().getAdCompanyDatabase();
-		
+		MagazineDatabase mdb = Main.getInstance().getDatabase()
+				.getMagazineDatabase();
+		SubscriberDatabase sdb = Main.getInstance().getDatabase()
+				.getSubscriberDatabase();
+		AdCompanyDatabase adb = Main.getInstance().getDatabase()
+				.getAdCompanyDatabase();
+
 		publishedMagazines = mdb.getPublishedMagazines();
 		inProgressMagazines = mdb.getInProgressMagazines();
 		activeSubscribers = sdb.getActiveSubscribers();
@@ -218,12 +219,15 @@ public class MainGUI extends JFrame {
 		adCompanies = adb.getAdCompanies();
 		authors = sdb.getAuthors();
 	}
-	
-	public void refreshLists(){
-		MagazineDatabase mdb = Main.getInstance().getDatabase().getMagazineDatabase();
-		SubscriberDatabase sdb = Main.getInstance().getDatabase().getSubscriberDatabase();
-		AdCompanyDatabase adb = Main.getInstance().getDatabase().getAdCompanyDatabase();
-		
+
+	public void refreshLists() {
+		MagazineDatabase mdb = Main.getInstance().getDatabase()
+				.getMagazineDatabase();
+		SubscriberDatabase sdb = Main.getInstance().getDatabase()
+				.getSubscriberDatabase();
+		AdCompanyDatabase adb = Main.getInstance().getDatabase()
+				.getAdCompanyDatabase();
+
 		publishedMagazines = mdb.getPublishedMagazines();
 		inProgressMagazines = mdb.getInProgressMagazines();
 		activeSubscribers = sdb.getActiveSubscribers();
@@ -231,34 +235,32 @@ public class MainGUI extends JFrame {
 		doNotMailSubscribers = sdb.getDoNotMailSubscribers();
 		adCompanies = adb.getAdCompanies();
 		authors = sdb.getAuthors();
-		
-		
+
 		refreshSelectionList();
 	}
 
-	@SuppressWarnings({"unchecked" })
-	private void refreshSelectionList(){
-		
-		if(rbActiveSubscribers.isSelected()){
-			selectionList.setListData(activeSubscribers.toArray());	
-		}else if(rbInactiveSubscribers.isSelected()){
-			selectionList.setListData(inactiveSubscribers.toArray());	
-		}else if(rbDoNotMailSubscribers.isSelected()){
-			selectionList.setListData(doNotMailSubscribers.toArray());	
-		}else if(rbInProgressMagazines.isSelected()){
-			selectionList.setListData(inProgressMagazines.toArray());	
-		}else if(rbPublishedMagazines.isSelected()){
-			selectionList.setListData(publishedMagazines.toArray());	
-		}else if(rbActiveAdCompanies.isSelected()){
-			selectionList.setListData(adCompanies.toArray());	
-		}else if (rbAuthors.isSelected()){
+	@SuppressWarnings({ "unchecked" })
+	private void refreshSelectionList() {
+
+		if (rbActiveSubscribers.isSelected()) {
+			selectionList.setListData(activeSubscribers.toArray());
+		} else if (rbInactiveSubscribers.isSelected()) {
+			selectionList.setListData(inactiveSubscribers.toArray());
+		} else if (rbDoNotMailSubscribers.isSelected()) {
+			selectionList.setListData(doNotMailSubscribers.toArray());
+		} else if (rbInProgressMagazines.isSelected()) {
+			selectionList.setListData(inProgressMagazines.toArray());
+		} else if (rbPublishedMagazines.isSelected()) {
+			selectionList.setListData(publishedMagazines.toArray());
+		} else if (rbAdCompanies.isSelected()) {
+			selectionList.setListData(adCompanies.toArray());
+		} else if (rbAuthors.isSelected()) {
 			selectionList.setListData(authors.toArray());
 		}
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void initMisc(){
-		
 		jsp = new JScrollPane();
 		jsp.setLocation(10, 40);
 		jsp.setSize(250, 150);
@@ -276,6 +278,24 @@ public class MainGUI extends JFrame {
 								.get(selectionList.getSelectedIndex());
 						EditMagazineGUI emGUI = new EditMagazineGUI(mag);
 						emGUI.setVisible(true);
+					}
+					else if(rbActiveSubscribers.isSelected() || rbInactiveSubscribers.isSelected() 
+							|| rbDoNotMailSubscribers.isSelected()){
+						Subscriber sub = null;
+						
+						if(rbActiveSubscribers.isSelected())
+							sub = Main.getInstance().getDatabase().getSubscriberDatabase().getActiveSubscribers().get(selectionList.getSelectedIndex());
+						else if(rbInactiveSubscribers.isSelected())
+							sub = Main.getInstance().getDatabase().getSubscriberDatabase().getInactiveSubscribers().get(selectionList.getSelectedIndex());
+						else
+							sub = Main.getInstance().getDatabase().getSubscriberDatabase().getDoNotMailSubscribers().get(selectionList.getSelectedIndex());
+						
+						EditSubscriberGUI esGUI = new EditSubscriberGUI(sub);
+						esGUI.setVisible(true);
+					}else if(rbAdCompanies.isSelected()){
+						AdCompany company = Main.getInstance().getDatabase().getAdCompanyDatabase().getAdCompanies().get(selectionList.getSelectedIndex());
+						EditAdCompanyGUI eaGUI = new EditAdCompanyGUI(company);
+						eaGUI.setVisible(true);
 					}
 				}
 			}
