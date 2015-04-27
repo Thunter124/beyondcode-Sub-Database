@@ -1,0 +1,83 @@
+package com.beyondcode.databases;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.beyondcode.core.Author;
+import com.beyondcode.core.Subscriber;
+
+
+public class SubscriberDatabase implements Serializable{
+	
+	private static final long serialVersionUID = 310181458808638633L;
+	private ArrayList<Subscriber> activeSubscribers;
+	private ArrayList<Subscriber> inactiveSubscribers;
+	private ArrayList<Subscriber> doNotMailSubscribers;
+	private ArrayList<Author> authors;
+	
+	
+	public SubscriberDatabase(){
+		activeSubscribers = new ArrayList<Subscriber>();
+		inactiveSubscribers = new ArrayList<Subscriber>();
+		doNotMailSubscribers = new ArrayList<Subscriber>();
+		authors = new ArrayList<Author>();
+	}
+	
+	public void addNewAuthor(Author author){
+		if(authors == null)
+			System.out.println("authors in null");
+		authors.add(author);
+	}
+	
+	public ArrayList<Author> getAuthors(){
+		return authors;
+	}
+	
+	public void addNewSubscriber(Subscriber sub){
+		activeSubscribers.add(sub);
+	}
+	
+	public boolean moveSubToDoNotMail(Subscriber sub){
+		if(inactiveSubscribers.contains(sub)){
+			doNotMailSubscribers.add(sub);
+			inactiveSubscribers.remove(sub);
+			return true;
+		}
+		return false;
+	}
+	
+	public ArrayList<Subscriber> getActiveSubscribers(){
+		return activeSubscribers;
+	}
+	
+	public ArrayList<Subscriber> getInactiveSubscribers(){
+		return inactiveSubscribers;
+	}
+	
+	public ArrayList<Subscriber> getDoNotMailSubscribers(){
+		return doNotMailSubscribers;
+	}
+	public void printLabels() throws FileNotFoundException, UnsupportedEncodingException{
+		PrintWriter writer = new PrintWriter("Lables", "UTF-8");
+		//Renew Subsriptions Label
+		for(Subscriber temp : inactiveSubscribers){
+			writer.println(temp.getBillingName() + " your Subscription has expired. Please renew soon.");
+		}
+		//Close to epiration Label
+		for(Subscriber temp : activeSubscribers){
+			if(temp.getCopiesRemaining()<=3){
+			writer.println(temp.getBillingName() + " your Subscription is close to epiration!");
+			}
+		}
+		//Normal Label
+		for(Subscriber temp : activeSubscribers){
+			writer.println(temp.getBillingName() + " enjoy your Magazine!!!");
+		
+		}
+	}
+	
+
+}
