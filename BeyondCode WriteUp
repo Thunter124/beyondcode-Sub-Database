@@ -1,0 +1,31 @@
+Myles Creese
+Tyler Entrekin
+Alex Finney
+Hunter King 
+Beyond Code Product Write Up
+
+	    The product enables the user to create new magazines via the add magazine button. Once created, the magazine
+will be viewable in the box in the left hand side of the window when the “Magazines in Progress” radio button
+is selected. At this point, the magazine desired may be double clicked to edit it. Subscribers, authors, and 
+ad companies may be added via similar buttons and likewise edited. 
+	    When adding or editing subscribers, multiple copies may be sent to multiple addresses or to the same address. 
+This is accomplished by placing the desired number of addresses in the box that is marked with that field. For 
+each address input , the program will require the number of issues desired for that address. For each subscriber,
+there is also the total number of issues attached to that subscriber that can be input by filling out the
+“starting issues” box. So long as the number issues attached to the subscriber does not reach zero, the subscriber 
+ will continue to be mailed monthly issues of the magazine. Once the subscriber gets to their last issue, a notice
+letting them know their subscription has expired will be sent with the magazine. The subscriber will also be moved 
+to the inactive list at this point. Each month a label advertising a subscription renewal will be generated for the
+subscribers on this inactive list. If they renew their subscription, more issues will be added to the subscriber 
+and they will be moved from inactive to active. However, if the subscriber requests to not receive the inactive notices
+anymore, they will be moved to a do not mail list. One other note about subscribers, they may also be on the board of 
+advisers. If this is the case, then the box marked BOA should be checked and that subscriber will continually receive a
+copy of each month's issue until the box is unchecked. 
+	    Authors are added and retained like other system objects. When an article that their authorship is attributed to is
+ published in the magazine, they get 12 months worth of issues. They can be connected with their articles when double 
+clicking on a magazine and adding an article. All authors in the system are available there to connect to the article.
+Similarly, ad companies are added to the system and connected with an ad inside an issue of the magazine. Ad companies
+will be included on the mailing list so as to give them a complimentary issue of the magazine their ad runs in. When 
+the magazine is finalized, it can be published. Once an issue is published, the mailing list is generated and all
+issues of the subscribers involved are decremented accordingly and active subscribers reaching zero issues are moved to
+the inactive list. 
